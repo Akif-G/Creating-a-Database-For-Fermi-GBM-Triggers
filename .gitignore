@@ -1,0 +1,4 @@
+COMPARE/
+__pycache__/
+*.db
+notes.txt
