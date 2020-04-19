@@ -41,12 +41,13 @@ print('READING END\n->Starting to create the database...')
 import sqlite3
 from sqlite3 import Error
 from DataBaseProcessors import trigdate as td
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 conn = sqlite3.connect('triggered.db')
 c = conn.cursor()
 
 try:
-    c.execute('''CREATE TABLE explored_data (json_raw,time_mjd, time_met,time_iso)''')
+    c.execute('''CREATE TABLE explored_data (time_mjd, time_met,time_iso,json_raw)''')
 
 except Error:
     c.execute('''DROP TABLE explored_data''')

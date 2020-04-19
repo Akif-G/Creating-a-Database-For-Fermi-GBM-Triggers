@@ -44,7 +44,7 @@ print("\nReading data is over.")
 print("Creating database...")
 
 # We created our data-structure, now it is time to create our database from it
-
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 import sqlite3
 from sqlite3 import Error
 

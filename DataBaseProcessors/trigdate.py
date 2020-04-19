@@ -17,7 +17,8 @@ except:
     try:
         print("no Leap Second file found in:"+str(leapPath))
         print("looking locally...")
-        leapPath=os.path.join(os.path.dirname(__file__),"/leap_sec.txt")
+        leapPath=os.path.join(os.path.dirname(__file__),'leap_sec.txt')
+        print(leapPath)
         line=""
         with open(leapPath, "r") as f:
             lines = f.readlines()
@@ -26,7 +27,7 @@ except:
             if is_float(line):
                 leapSecs.append(float(line))
     except:
-        print("no Leap Second file found in:"+str(leapPath))
+        print("no Leap Second file found")
         print("using predefined time values with starting point: 51910.00000000")
         leapSecs.append(53735.99998843)
         leapSecs.append(54831.99998843)
