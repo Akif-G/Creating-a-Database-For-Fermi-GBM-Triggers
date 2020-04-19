@@ -1,6 +1,29 @@
 import datetime as dt
 from astropy.time import Time
 
+# global leap Second file searchers...
+leapSecs=[]
+try:
+    leapPath="vdata1/shared/search_transients/codes/misc/leap_sec.txt"
+    line=""
+    with open(leapPath, "r") as f:
+        lines = f.readlines()
+    
+    for line in lines:
+        if is_float(line):
+            leapSecs.append(float(line))
+
+except:
+    print("no Leap Second file found in:"+str(leapPath))
+    print("using predefined time values with starting point: 51910.00000000")
+    leapSecs.append(53735.99998843)
+    leapSecs.append(54831.99998843)
+    leapSecs.append(56108.99998843)
+    leapSecs.append(57203.99998843)
+    leapSecs.append(57753.99998843)
+
+
+
 def is_float(s):
     """ Returns True is string is a number. """
     try:
@@ -15,8 +38,8 @@ class trigDate:
         #self class provides very complex comparisons
         #for triggers date and gave you simple progress about
         if(Format=="mjd"):
-            self.mjd=time
-            self.jd=self.mjd+2400000.5
+            self.mjd=float(time)
+            self.jd=float(self.mjd)+2400000.5
             self.met=self.MJDtoMET(self.mjd)
             self.date=Time(str(self.jd),format='jd').iso
 
@@ -27,7 +50,7 @@ class trigDate:
             self.date=Time(str(self.jd),format='jd').iso
 
         elif(Format=="jd"):
-            self.jd=time
+            self.jd=float(time)
             self.mjd=self.jd-2400000.5
             self.met=self.MJDtoMET(self.mjd)
             self.date=Time(str(self.jd),format='jd').iso
@@ -42,63 +65,20 @@ class trigDate:
         else:
             raise Exception
 
-        print("Format is :", Format)
+        #print("Format is :", Format)
 
 
     def MJDtoMET(self,mjd):
-        leapSecs=[]
-        try:
-            leapPath="vdata1/shared/search_transients/codes/misc/leap_sec.txt"
-            line=""
-            with open(leapPath, "r") as f:
-                lines = f.readlines()
-            
-            for line in lines:
-                if is_float(line):
-                    leapSecs.append(float(line))
-
-        except:
-            print("no Leap Second file found in:"+str(leapPath))
-            print("using predefined time values with starting point: 51910.00000000")
-            leapSecs.append(53735.99998843)
-            leapSecs.append(54831.99998843)
-            leapSecs.append(56108.99998843)
-            leapSecs.append(57203.99998843)
-            leapSecs.append(57753.99998843)
-
         met=(mjd-51910.00000000)*60*60*24
         for leap in leapSecs:
             if leap>=51910.00000000:
                 if mjd>leap:
                     met=met+1
 
-        return met
+        return float(met)
         
 
     def METtoMJD(self,met):
-        leapSecs=[]
-        #/vdata1/shared/search_transients/codes/misc/
-        try:
-            leapPath="/leap_sec.txt"
-            fp=open(leapPath,'r+')
-            line=""
-            with open(self.dataFileName, "r") as f:
-                lines = f.readlines()
-            
-            for line in lines:
-                if is_float(line):
-                    leapSecs.append(float(line))
-
-        except:
-            print("no Leap Second file found in:"+str(leapPath))
-            print("using predefined time values with starting point: 51910.00000000")
-            leapSecs.append(53735.99998843)
-            leapSecs.append(54831.99998843)
-            leapSecs.append(56108.99998843)
-            leapSecs.append(57203.99998843)
-            leapSecs.append(57753.99998843)
-
-
         mjdTrial=(met/(60*60*24))+51910
         
         for leap in leapSecs:
@@ -107,7 +87,9 @@ class trigDate:
                     met-=1
 
         mjd=(met/(60*60*24))+51910
-        return mjd
+        return float(mjd)
+    
+
         
 """tests
 mete=trigDate(time=57755,Format="mjd")

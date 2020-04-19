@@ -45,14 +45,14 @@ conn = sqlite3.connect('triggered.db')
 c = conn.cursor()
 #create database: if exist delete and create again
 try:
-    c.execute('''CREATE TABLE triggered_data
+    c.execute('''CREATE TABLE heasarc_data
                 (version,trigger_name,name,ra,dec,lii,bii,error_radius,time,end_time,trigger_time,time_mjd,end_time_mjd,trigger_time_mjd,trigger_type,reliability,
                 trigger_timescale,trigger_algorithm,channel_low,channel_high,adc_low,adc_high,detector_mask,geo_long,geo_lat,
                 ra_scx,dec_scx,ra_scz,dec_scz,theta,phi,localization_source)''')
 
 except Error:
-    c.execute('''DROP TABLE triggered_data ''')
-    c.execute('''CREATE TABLE triggered_data
+    c.execute('''DROP TABLE heasarc_data ''')
+    c.execute('''CREATE TABLE heasarc_data
                 (version,trigger_name,name,ra,
                 dec,lii,bii,error_radius,
                 time,end_time,trigger_time,time_mjd,
@@ -66,7 +66,7 @@ except Error:
 count=1
 sys.stdout.write("\r: ")
 for i in allTriggers:
-    c.execute('INSERT INTO triggered_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(i.dictionary.get('version'),i.dictionary.get('trigger_name'),i.dictionary.get('name'),i.dictionary.get('ra'),
+    c.execute('INSERT INTO heasarc_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(i.dictionary.get('version'),i.dictionary.get('trigger_name'),i.dictionary.get('name'),i.dictionary.get('ra'),
                                                                                                                      i.dictionary.get('dec'),i.dictionary.get('lii'),i.dictionary.get('bii'),i.dictionary.get('error_radius'),
                                                                                                                      i.dictionary.get('time'),i.dictionary.get('end_time'),i.dictionary.get('trigger_time'),i.dictionary.get('time(mjd)'),
                                                                                                                      i.dictionary.get('end_time(mjd)'),i.dictionary.get('trigger_time(mjd)'),i.dictionary.get('trigger_type'),i.dictionary.get('reliability'),
