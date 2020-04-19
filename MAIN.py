@@ -1,10 +1,10 @@
 import os		
 import sys
 
-execfile('./DataBaseProcessors/createHeasarcDatabase.py')
+execfile('./createHeasarcDatabase.py')
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-execfile('./DataBaseProcessors/createFoundDatabase.py')
+execfile('./createFoundDatabase.py')
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 execfile('./compareDatabases.py')
 
