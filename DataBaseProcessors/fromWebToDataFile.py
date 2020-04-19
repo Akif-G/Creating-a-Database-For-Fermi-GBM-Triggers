@@ -1,5 +1,4 @@
-
-import urllib2
+import requests
 import os
 
 class website:
@@ -12,6 +11,7 @@ class website:
 
     def __init__(self,dataFileName="data",url=heasarc_url):
         self.dataFileName=dataFileName
+        self.dataFilePath=os.path.join(os.path.dirname(os.path.realpath(__file__)),self.dataFileName)
         try:
             f=open(dataFileName,"r")
             print("file found: "+str(dataFileName))
@@ -38,7 +38,8 @@ class website:
             f.writelines(url)
         else:
             print("URL found: "+self.url)
-        
+        if(not f.closed):
+            f.close()
     def change_url(self,givenUrl):
         """after changing url you need to use method: updateContent"""
         self.url=givenUrl
@@ -55,21 +56,29 @@ class website:
                 else:
                     f.write(givenUrl)
         print("Url changed: " +str(self.url)+"\nUse method: updateContent to update DATA.")
+        if(not self.dataFile.closed):
+            self.dataFile.close()
 
     def change_dataFileName(self,dataFileName):
         self.dataFileName=dataFileName   
  
     def updateContent(self):
         try:
+            self.dataFile=open(self.dataFileName,"r+")
+            oldContent=self.dataFile.readlines()
             self.dataFile.close()
             self.dataFile=open(self.dataFileName,"wb")
-            response = urllib2.urlopen(self.url)
-            webContent = response.read()
+            response = requests.get(self.url)
+            if(response.status_code!=200):
+                prnt("status non::"+ str(response.status_code))
+                raise Exception
+            webContent=response.content
             self.dataFile.write(str(self.url+"\n").encode())
             self.dataFile.write(webContent)
             self.dataFile.close()
-            self.dataFile= open(self.dataFileName,"r+")
             print("UPDATED DATA FROM: "+str(self.url))
         except:
             print("UPDATE IS FAILED !!!")
-
+            self.dataFile.write(oldContent)
+            self.dataFile.close()
+            raise Exception

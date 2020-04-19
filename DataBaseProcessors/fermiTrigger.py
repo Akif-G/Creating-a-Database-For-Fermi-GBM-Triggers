@@ -1,11 +1,10 @@
-import trigdate as trigdate
+from DataBaseProcessors import trigdate as trigdate
 
 def find_nth(haystack, needle, n):
     if n==0:
         return -1
     else:
-        start = hayst
-        ack.find(needle)
+        start = haystack.find(needle)
         while start >= 0 and n > 1:
             start = haystack.find(needle, start+len(needle))
             n -= 1

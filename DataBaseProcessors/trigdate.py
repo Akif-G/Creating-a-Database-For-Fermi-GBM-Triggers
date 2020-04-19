@@ -14,13 +14,25 @@ try:
             leapSecs.append(float(line))
 
 except:
-    print("no Leap Second file found in:"+str(leapPath))
-    print("using predefined time values with starting point: 51910.00000000")
-    leapSecs.append(53735.99998843)
-    leapSecs.append(54831.99998843)
-    leapSecs.append(56108.99998843)
-    leapSecs.append(57203.99998843)
-    leapSecs.append(57753.99998843)
+    try:
+        print("no Leap Second file found in:"+str(leapPath))
+        print("looking locally...")
+        leapPath=os.path.join(os.path.dirname(__file__),"/leap_sec.txt")
+        line=""
+        with open(leapPath, "r") as f:
+            lines = f.readlines()
+        
+        for line in lines:
+            if is_float(line):
+                leapSecs.append(float(line))
+    except:
+        print("no Leap Second file found in:"+str(leapPath))
+        print("using predefined time values with starting point: 51910.00000000")
+        leapSecs.append(53735.99998843)
+        leapSecs.append(54831.99998843)
+        leapSecs.append(56108.99998843)
+        leapSecs.append(57203.99998843)
+        leapSecs.append(57753.99998843)
 
 
 

@@ -40,7 +40,7 @@ print('READING END\n->Starting to create the database...')
 
 import sqlite3
 from sqlite3 import Error
-import trigdate as td
+from DataBaseProcessors import trigdate as td
 
 conn = sqlite3.connect('triggered.db')
 c = conn.cursor()
@@ -61,7 +61,7 @@ for i in allTimes:
 count=1
 sys.stdout.write("\r: ")
 for i in range(len(allTimes)):
-    c.execute('INSERT INTO explored_data VALUES (?,?,?,?)',(asTrigtimes[i].mjd,asTrigtimes[i].met,asTrigtimes[i].date,allTimes[i]))
+    c.execute('INSERT INTO explored_data VALUES (?,?,?,?)',(asTrigtimes[i].mjd,asTrigtimes[i].met,asTrigtimes[i].date,str(allTimes[i])))
     sys.stdout.write(str(count))
     if count!=len(asTrigtimes):
         for _ in range(len(str(count))):

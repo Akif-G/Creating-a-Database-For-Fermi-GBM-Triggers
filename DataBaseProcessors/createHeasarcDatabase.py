@@ -1,16 +1,23 @@
-
-import fromWebToDataFile as website
-import fermiTrigger as trig
 import os
 import sys
+sys.path.insert(0,'..')
+
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
+from DataBaseProcessors import fromWebToDataFile as website
+from DataBaseProcessors import fermiTrigger as trig
+
+
 print("\n\n")
 heasarc=website.website(dataFileName="heasarc",url="https://heasarc.gsfc.nasa.gov/FTP/fermi/data/tdat/heasarc_fermigtrig.tdat")
-heasarc.updateContent()
-
+try:
+    heasarc.updateContent()
+except:
+    print("need to update")
+    raise Exception
+    
 allTriggers=[]
-
 f=open(heasarc.dataFileName,"r")
+
 line=""
 while line!="<DATA>\n":
     try:    
