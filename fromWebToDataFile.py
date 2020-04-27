@@ -27,7 +27,14 @@ class website:
         f.seek(0)
 
         self.dataFile=f
-        self.url=self.dataFile.readline()     
+        self.url=""
+        firstline=self.dataFile.readline() 
+        for char in firstline:
+            if char==" " or char =="\n":
+                break
+            else:
+                self.url+=char
+
 
         if len(self.url)==0:
             print("NO DATA & URL in file! Assign URL with method: website.change_url()")
@@ -70,7 +77,7 @@ class website:
             self.dataFile=open(self.dataFileName,"wb")
             response = requests.get(self.url)
             if(response.status_code!=200):
-                prnt("status non::"+ str(response.status_code))
+                print("status non::"+ str(response.status_code))
                 raise Exception
             webContent=response.content
             self.dataFile.write(str(self.url+"\n").encode())
@@ -79,6 +86,6 @@ class website:
             print("UPDATED DATA FROM: "+str(self.url))
         except:
             print("UPDATE IS FAILED !!! RUN AGAIN!!!")
-            self.dataFile.write(oldContent)
+            for i in oldContent:
+                self.dataFile.write(i.encode())
             self.dataFile.close()
-            raise Exception

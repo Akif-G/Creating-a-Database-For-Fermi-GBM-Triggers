@@ -4,3 +4,4 @@ __pycache__/
 notes.txt
 /Mode_2
 *.pyc
+.vscode/

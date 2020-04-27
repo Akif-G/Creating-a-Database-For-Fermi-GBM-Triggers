@@ -5,40 +5,44 @@ from astropy.time import Time
 leapSecs=[]
 try:
     leapPath="/vdata1/shared/search_transients/codes/misc/leap_sec.txt"
-    line=""
-    with open(leapPath, "r") as f:
-        lines = f.readlines()
-    
-    for line in lines:
-        if is_float(line):
-            leapSecs.append(float(line))
+    with open(leapPath, "r+") as f:
+        for line in f:
+            try:
+                leapSecs.append(float(line))
+            except EOFError:
+                break
+            except:
+                pass
     print("file found::")
-    print(leapSecs)
 
 except:
     try:
         print("no Leap Second file found in:"+str(leapPath))
         print("looking locally...")
         line=""
-        with open("leap_sec.txt", "r") as f:
-            lines = f.readlines()
-        
-        for line in lines:
-            if is_float(line):
-                leapSecs.append(float(line))
+        with open('leap_sec.txt', "r+") as f:
+            for line in f:
+                try:
+                    leapSecs.append(float(line))
+                except EOFError:
+                    break
+                except:
+                    pass
+
     except:
-        print("no Leap Second file found")
-        print("using predefined time values with starting point: 51910.00000000")
-        leapSecs.append(53735.99998843)
-        leapSecs.append(54831.99998843)
-        leapSecs.append(56108.99998843)
-        leapSecs.append(57203.99998843)
-        leapSecs.append(57753.99998843)
+        if len(leapSecs)<3:
+            print("no Leap Second file found")
+            print("using predefined time values with starting point: 51910.00000000")
+            leapSecs.append(53735.99998843)
+            leapSecs.append(54831.99998843)
+            leapSecs.append(56108.99998843)
+            leapSecs.append(57203.99998843)
+            leapSecs.append(57753.99998843)
 
 print("leap seconds:")       
 for i in range(len(leapSecs)):
     print(i,":",leapSecs[i])
-print("if any problem appared PLEASE NOTİFY DEVELOPER.")
+print("if any problem is appeared PLEASE NOTIFY DEVELOPER.")
 
 def is_float(s):
     """ Returns True is string is a number. """

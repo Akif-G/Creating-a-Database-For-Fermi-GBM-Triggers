@@ -12,8 +12,7 @@ heasarc=website.website(dataFileName="heasarc",url="https://heasarc.gsfc.nasa.go
 try:
     heasarc.updateContent()
 except:
-    print("need to update")
-    raise Exception
+    print("no internet conneciton")
     
 allTriggers=[]
 f=open(heasarc.dataFileName,"r")
