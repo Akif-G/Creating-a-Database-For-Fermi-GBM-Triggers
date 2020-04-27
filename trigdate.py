@@ -4,7 +4,7 @@ from astropy.time import Time
 # global leap Second file searchers...
 leapSecs=[]
 try:
-    leapPath="vdata1/shared/search_transients/codes/misc/leap_sec.txt"
+    leapPath="/vdata1/shared/search_transients/codes/misc/leap_sec.txt"
     line=""
     with open(leapPath, "r") as f:
         lines = f.readlines()
@@ -12,15 +12,15 @@ try:
     for line in lines:
         if is_float(line):
             leapSecs.append(float(line))
+    print("file found::")
+    print(leapSecs)
 
 except:
     try:
         print("no Leap Second file found in:"+str(leapPath))
         print("looking locally...")
-        leapPath=os.path.join(os.path.dirname(__file__),'leap_sec.txt')
-        print(leapPath)
         line=""
-        with open(leapPath, "r") as f:
+        with open("leap_sec.txt", "r") as f:
             lines = f.readlines()
         
         for line in lines:
@@ -35,7 +35,10 @@ except:
         leapSecs.append(57203.99998843)
         leapSecs.append(57753.99998843)
 
-
+print("leap seconds:")       
+for i in range(len(leapSecs)):
+    print(i,":",leapSecs[i])
+print("if any problem appared PLEASE NOTİFY DEVELOPER.")
 
 def is_float(s):
     """ Returns True is string is a number. """
@@ -46,7 +49,7 @@ def is_float(s):
         return False
 
 class trigDate:
-    def __init__(self,time=0,Format="mjd"):
+    def __init__(self,time,Format="mjd"):
         #you can use met,mjd,jd,iso
         #self class provides very complex comparisons
         #for triggers date and gave you simple progress about
@@ -57,7 +60,7 @@ class trigDate:
             self.date=Time(float(self.jd),format='jd').iso
 
         elif(Format=="met"):
-            self.met=time
+            self.met=float(time)
             self.mjd=self.METtoMJD(self.met)
             self.jd=self.mjd+2400000.5
             self.date=Time(float(self.jd),format='jd').iso

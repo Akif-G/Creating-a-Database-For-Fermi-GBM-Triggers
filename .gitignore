@@ -3,3 +3,4 @@ __pycache__/
 *.db
 notes.txt
 /Mode_2
+*.pyc
