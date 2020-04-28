@@ -60,4 +60,12 @@ try:
 except NameError:
     exec(open('./compareDatabases.py').read())
 
+willTest=raw_input("WOULD YOU LIKE TO TEST THE RESULTS? IT IS VERY SLOW but accurate...\nY=YES\nN=NO")
+if(willTest=="Y"):
+    try:
+        execfile('./slowTester.py')
+    except NameError:
+        exec(open('./slowTester.py').read())
+
+    
 print("\n\n---------------------------------------END---------------------------------------")
