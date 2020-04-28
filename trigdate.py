@@ -1,11 +1,11 @@
 import datetime as dt
 from astropy.time import Time
-
 # global leap Second file searchers...
+print("if any problem is appeared PLEASE NOTIFY DEVELOPER.")
+
 leapSecs=[]
 try:
-    leapPath="/vdata1/shared/search_transients/codes/misc/leap_sec.txt"
-    with open(leapPath, "r+") as f:
+    with open('/vdata1/shared/search_transients/codes/misc/leap_sec.txt', "r") as f:
         for line in f:
             try:
                 leapSecs.append(float(line))
@@ -13,7 +13,7 @@ try:
                 break
             except:
                 pass
-    print("file found::")
+    print("file found in:: /vdata1/shared/search_transients/codes/misc/leap_sec.txt")
 
 except:
     try:
@@ -42,7 +42,6 @@ except:
 print("leap seconds:")       
 for i in range(len(leapSecs)):
     print(i,":",leapSecs[i])
-print("if any problem is appeared PLEASE NOTIFY DEVELOPER.")
 
 def is_float(s):
     """ Returns True is string is a number. """

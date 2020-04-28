@@ -28,31 +28,34 @@ mode1_trig=mode1["time_met"]
 
 
 #initializing for mode 1
-for i in range(len(hea_trig)):
-    if hea_trig.at[i]>(mode1_trig.at[0]) and  hea_trig.at[i]<(mode1_trig.at[len(mode1_trig)-1]) :
-        heasarc.at[i,'mode1']=1
+if len(mode1_trig)!=0:
+    for i in range(len(hea_trig)):
+        if hea_trig.at[i]>(mode1_trig.at[0]) and  hea_trig.at[i]<(mode1_trig.at[len(mode1_trig)-1]) :
+            heasarc.at[i,'mode1']=1
 
-##searching algo.
-a=0
-i=0
-j=0
-while i<len(hea_trig)-1 and j<len(mode1_trig)-1 :
-    if hea_trig.at[i]>=(mode1_trig.at[j]-0.5):
-        if hea_trig.at[i]<=(mode1_trig.at[j]+0.5):
-            heasarc.at[i,'mode1']=2
-            explored.at[j,'mode1']=2
-            j+=1
-            if i>0:
-                i-=1
+    ##searching algo.
+    a=0
+    i=0
+    j=0
+    while i<len(hea_trig)-1 and j<len(mode1_trig)-1 :
+        if hea_trig.at[i]>=(mode1_trig.at[j]-0.5):
+            if hea_trig.at[i]<=(mode1_trig.at[j]+0.5):
+                heasarc.at[i,'mode1']=2
+                mode1.at[j,'mode1']=2
+                j+=1
+                a+=1
+                if i>0:
+                    i-=1
+            else:
+                j+=1
+                if i>0:
+                    i-=1
         else:
-            j+=1
-            if i>0:
-                i-=1
-    else:
-        i+=1
+            i+=1
 
-print("MODE1: "+str(a))
-
+    print("MODE1: "+str(a))
+else:
+    print("MODE1: not exist.")
 
 ### MODE 2
 
@@ -65,30 +68,33 @@ mode2_trig=mode2["time_met"]
 
 
 #initializing for mode2
-for i in range(len(hea_trig)):
-    if hea_trig.at[i]>(mode2_trig.at[0]) and  hea_trig.at[i]<(mode2_trig.at[len(mode2_trig)-1]) :
-        heasarc.at[i,'mode2']=1
+if len(mode2_trig)!=0:
+    for i in range(len(hea_trig)):
+        if hea_trig.at[i]>(mode2_trig.at[0]) and  hea_trig.at[i]<(mode2_trig.at[len(mode2_trig)-1]) :
+            heasarc.at[i,'mode2']=1
 
-##searching algo.
-a=0
-i=0
-j=0
-while i<len(hea_trig)-1 and j<len(mode2_trig)-1 :
-    if hea_trig.at[i]>=(mode2_trig.at[j]-0.5):
-        if hea_trig.at[i]<=(mode2_trig.at[j]+0.5):
-            heasarc.at[i,'mode2']=2
-            explored.at[j,'mode2']=2
-            j+=1
-            if i>0:
-                i-=1
+    ##searching algo.
+    a=0
+    i=0
+    j=0
+    while i<len(hea_trig)-1 and j<len(mode2_trig)-1 :
+        if hea_trig.at[i]>=(mode2_trig.at[j]-0.5):
+            if hea_trig.at[i]<=(mode2_trig.at[j]+0.5):
+                heasarc.at[i,'mode2']=2
+                mode2.at[j,'mode2']=2
+                j+=1
+                a+=1
+                if i>0:
+                    i-=1
+            else:
+                j+=1
+                if i>0:
+                    i-=1
         else:
-            j+=1
-            if i>0:
-                i-=1
-    else:
-        i+=1
-print("MODE2: "+str(a))
-
+            i+=1
+    print("MODE2: "+str(a))
+else:
+    print("MODE2: not exist.")
 
 ### MODE 3
 
@@ -101,29 +107,34 @@ mode3_trig=mode3["time_met"]
 
 
 #initializing for mode3
-for i in range(len(hea_trig)):
-    if hea_trig.at[i]>(mode3_trig.at[0]) and  hea_trig.at[i]<(mode3_trig.at[len(mode3_trig)-1]) :
-        heasarc.at[i,'mode3']=1
+if len(mode3_trig)!=0:
+    for i in range(len(hea_trig)):
+        if hea_trig.at[i]>(mode3_trig.at[0]) and  hea_trig.at[i]<(mode3_trig.at[len(mode3_trig)-1]) :
+            heasarc.at[i,'mode3']=1
 
-##searching algo.
-a=0
-i=0
-j=0
-while i<len(hea_trig)-1 and j<len(mode3_trig)-1 :
-    if hea_trig.at[i]>=(mode3_trig.at[j]-0.5):
-        if hea_trig.at[i]<=(mode3_trig.at[j]+0.5):
-            heasarc.at[i,'mode3']=2
-            explored.at[j,'mode3']=2
-            j+=1
-            if i>0:
-                i-=1
+    ##searching algo.
+    a=0
+    i=0
+    j=0
+    while i<len(hea_trig)-1 and j<len(mode3_trig)-1 :
+        if hea_trig.at[i]>=(mode3_trig.at[j]-0.5):
+            if hea_trig.at[i]<=(mode3_trig.at[j]+0.5):
+                heasarc.at[i,'mode3']=2
+                mode3.at[j,'mode3']=2
+                j+=1
+                a=+1
+                if i>0:
+                    i-=1
+            else:
+                j+=1
+                if i>0:
+                    i-=1
         else:
-            j+=1
-            if i>0:
-                i-=1
-    else:
-        i+=1
-print("MODE3: "+str(a))
+            i+=1
+    print("MODE3: "+str(a))
+else:
+    print("MODE3: not exist.")
+
 ### MODE 4
 
 mode4= pd.read_sql_query("SELECT * FROM Mode4", cnx)
@@ -135,45 +146,43 @@ mode4_trig=mode4["time_met"]
 
 
 #initializing for mode4
-for i in range(len(hea_trig)):
-    if hea_trig.at[i]>(mode4_trig.at[0]) and  hea_trig.at[i]<(mode4_trig.at[len(mode4_trig)-1]) :
-        heasarc.at[i,'mode4']=1
+if len(mode4_trig)!=0:
+    for i in range(len(hea_trig)):
+        if hea_trig.at[i]>(mode4_trig.at[0]) and  hea_trig.at[i]<(mode4_trig.at[len(mode4_trig)-1]) :
+            heasarc.at[i,'mode4']=1
 
-##searching algo.
-a=0
-i=0
-j=0
-while i<len(hea_trig)-1 and j<len(mode4_trig)-1 :
-    if hea_trig.at[i]>=(mode4_trig.at[j]-0.5):
-        if hea_trig.at[i]<=(mode4_trig.at[j]+0.5):
-            heasarc.at[i,'mode4']=2
-            explored.at[j,'mode4']=2
-            a+=1
-            j+=1
-            if i>0:
-                i-=1
+    ##searching algo.
+    a=0
+    i=0
+    j=0
+    while i<len(hea_trig)-1 and j<len(mode4_trig)-1 :
+        if hea_trig.at[i]>=(mode4_trig.at[j]-0.5):
+            if hea_trig.at[i]<=(mode4_trig.at[j]+0.5):
+                heasarc.at[i,'mode4']=2
+                mode4.at[j,'mode4']=2
+                a+=1
+                j+=1
+                if i>0:
+                    i-=1
+            else:
+                j+=1
+                if i>0:
+                    i-=1
         else:
-            j+=1
-            if i>0:
-                i-=1
-    else:
-        i+=1
+            i+=1
 
-print("MODE4: "+str(a))
-
-
+    print("MODE4: "+str(a))
+else:
+    print("MODE4: not exist.")
 
 
 
 heasarc.to_sql('heasarc_data', cnx, if_exists='replace', index = False)
-explored.to_sql('explored_data', cnx, if_exists='replace', index = False)
+mode1.to_sql('Mode1', cnx, if_exists='replace', index = False)
+mode2.to_sql('Mode2', cnx, if_exists='replace', index = False)
+mode3.to_sql('Mode3', cnx, if_exists='replace', index = False)
+mode4.to_sql('Mode4', cnx, if_exists='replace', index = False)
 
 
-
-
-
-
-
-#f.close()
 cnx.commit()
 cnx.close()
