@@ -37,7 +37,7 @@ try:
     mode1.insert(0, 'nearest_name', "")    
     mode1.insert(0, 'heasarc', 1)
 except:
-    mode1.drop(['nearest','nearest_name','mode1'],axis=1,inplace=True)
+    mode1.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
     mode1.insert(0, 'nearest', "")
     mode1.insert(0, 'heasarc', 1)
 
@@ -47,10 +47,13 @@ mode1_trig=mode1["time_met"]
 
 #initializing for mode 1
 if len(mode1_trig)!=0:
-    mjd=mode1["time_mjd"].astype(int)
+    mjd=pd.Series(mode1["time_mjd"])
+    mjd=mjd.astype(str).astype(float).astype(int).tolist()
     for i in range(len(hea_trig)):
-        if int(float(heasarc.at[i,'trigger_time_mjd'])) in mjd:
+        value=int(float(heasarc.at[i,'trigger_time_mjd']))
+        if value in mjd:
             heasarc.at[i,'mode1']=1
+ 
 
     ##searching algo.
     a=0
@@ -67,7 +70,7 @@ if len(mode1_trig)!=0:
                     mode1.at[j,'nearest_name']=str(heasarc.at[i-1,'trigger_name'])
             if hea_trig.at[i]<=(mode1_trig.at[j]+0.5):
                 heasarc.at[i,'mode1']=2
-                mode1.at[j,'mode1']=2
+                mode1.at[j,'heasarc']=2
                 j+=1
                 a+=1
                 if i>0:
@@ -93,7 +96,7 @@ try:
     mode2.insert(0, 'nearest_name', "")    
     mode2.insert(0, 'heasarc', 1)
 except:
-    mode2.drop(['nearest','nearest_name','mode2'],axis=1,inplace=True)
+    mode2.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
     mode2.insert(0, 'nearest', "")
     mode2.insert(0, 'heasarc', 1)
 
@@ -103,11 +106,13 @@ mode2_trig=mode2["time_met"]
 
 #initializing for mode2
 if len(mode2_trig)!=0:
-    mjd=mode2["time_mjd"].astype(int)
+    mjd=pd.Series(mode2["time_mjd"])
+    mjd=mjd.astype(str).astype(float).astype(int).tolist()
     for i in range(len(hea_trig)):
-        if int(float(heasarc.at[i,'trigger_time_mjd'])) in mjd:
+        value=int(float(heasarc.at[i,'trigger_time_mjd']))
+        if value in mjd:
             heasarc.at[i,'mode2']=1
-  
+ 
     ##searching algo.
     a=0
     i=0
@@ -124,7 +129,7 @@ if len(mode2_trig)!=0:
                     
             if hea_trig.at[i]<=(mode2_trig.at[j]+0.5):
                 heasarc.at[i,'mode2']=2
-                mode2.at[j,'mode2']=2
+                mode2.at[j,'heasarc']=2
                 j+=1
                 a+=1
                 if i>0:
@@ -149,7 +154,7 @@ try:
     mode3.insert(0, 'nearest_name', "")
     mode3.insert(0, 'heasarc', 1)
 except:
-    mode3.drop(['nearest','nearest_name','mode3'],axis=1,inplace=True)
+    mode3.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
     mode3.insert(0, 'nearest', "")
     mode3.insert(0, 'heasarc', 1)
 
@@ -159,10 +164,13 @@ mode3_trig=mode3["time_met"]
 
 #initializing for mode3
 if len(mode3_trig)!=0:
-    mjd=mode3["time_mjd"].astype(int)
+    mjd=pd.Series(mode3["time_mjd"])
+    mjd=mjd.astype(str).astype(float).astype(int).tolist()
     for i in range(len(hea_trig)):
-        if int(float(heasarc.at[i,'trigger_time_mjd'])) in mjd:
+        value=int(float(heasarc.at[i,'trigger_time_mjd']))
+        if value in mjd:
             heasarc.at[i,'mode3']=1
+ 
 
     ##searching algo.
     a=0
@@ -180,7 +188,7 @@ if len(mode3_trig)!=0:
                     
             if hea_trig.at[i]<=(mode3_trig.at[j]+0.5):
                 heasarc.at[i,'mode3']=2
-                mode3.at[j,'mode3']=2
+                mode3.at[j,'heasarc']=2
                 j+=1
                 a=+1
                 if i>0:
@@ -205,7 +213,7 @@ try:
     mode4.insert(0, 'nearest_name', "")
     mode4.insert(0, 'heasarc', 1)
 except:
-    mode4.drop(['nearest','nearest_name','mode4'],axis=1,inplace=True)
+    mode4.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
     mode4.insert(0, 'nearest', "")
     mode4.insert(0, 'heasarc', 1)
     
@@ -215,10 +223,13 @@ mode4_trig=mode4["time_met"]
 
 #initializing for mode4
 if len(mode4_trig)!=0:
-    mjd=mode4["time_mjd"].astype(int)
+    mjd=pd.Series(mode4["time_mjd"])
+    mjd=mjd.astype(str).astype(float).astype(int).tolist()
     for i in range(len(hea_trig)):
-        if int(float(heasarc.at[i,'trigger_time_mjd'])) in mjd:
+        value=int(float(heasarc.at[i,'trigger_time_mjd']))
+        if value in mjd:
             heasarc.at[i,'mode4']=1
+           
 
     ##searching algo.
     a=0
