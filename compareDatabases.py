@@ -35,11 +35,11 @@ mode1["time_met"]=pd.to_numeric(mode1["time_met"],errors='ignore')
 try:
     mode1.insert(0, 'nearest', 0)
     mode1.insert(0, 'nearest_name', "")    
-    mode1.insert(0, 'mode1', 1)
+    mode1.insert(0, 'heasarc', 1)
 except:
     mode1.drop(['nearest','nearest_name','mode1'],axis=1,inplace=True)
     mode1.insert(0, 'nearest', "")
-    mode1.insert(0, 'mode1', 1)
+    mode1.insert(0, 'heasarc', 1)
 
 mode1=mode1.sort_values(by='time_met')
 mode1=mode1.reset_index(drop = True)
@@ -90,11 +90,11 @@ mode2["time_met"]=pd.to_numeric(mode2["time_met"],errors='ignore')
 try:
     mode2.insert(0, 'nearest', 0)
     mode2.insert(0, 'nearest_name', "")    
-    mode2.insert(0, 'mode2', 1)
+    mode2.insert(0, 'heasarc', 1)
 except:
     mode2.drop(['nearest','nearest_name','mode2'],axis=1,inplace=True)
     mode2.insert(0, 'nearest', "")
-    mode2.insert(0, 'mode2', 1)
+    mode2.insert(0, 'heasarc', 1)
 
 mode2=mode2.sort_values(by='time_met')
 mode2=mode2.reset_index(drop = True)
@@ -102,10 +102,11 @@ mode2_trig=mode2["time_met"]
 
 #initializing for mode2
 if len(mode2_trig)!=0:
+    mjd=mode2["time_mjd"].astype(int)
     for i in range(len(hea_trig)):
-        if hea_trig.at[i]>(mode2_trig.at[0]) and  hea_trig.at[i]<(mode2_trig.at[len(mode2_trig)-1]) :
-            heasarc.at[i,'mode2']=1
-
+        if int(heasarc.at[i,'trigger_time_mjd']) in mjd:
+            heasarc.at[i,'mode1']=1
+  
     ##searching algo.
     a=0
     i=0
@@ -145,11 +146,11 @@ mode3["time_met"]=pd.to_numeric(mode3["time_met"],errors='ignore')
 try:
     mode3.insert(0, 'nearest', 0)
     mode3.insert(0, 'nearest_name', "")
-    mode3.insert(0, 'mode3', 1)
+    mode3.insert(0, 'heasarc', 1)
 except:
     mode3.drop(['nearest','nearest_name','mode3'],axis=1,inplace=True)
     mode3.insert(0, 'nearest', "")
-    mode3.insert(0, 'mode3', 1)
+    mode3.insert(0, 'heasarc', 1)
 
 mode3=mode3.sort_values(by='time_met')
 mode3=mode3.reset_index(drop = True)
@@ -200,11 +201,11 @@ mode4["time_met"]=pd.to_numeric(mode4["time_met"],errors='ignore')
 try:
     mode4.insert(0, 'nearest', 0)
     mode4.insert(0, 'nearest_name', "")
-    mode4.insert(0, 'mode4', 1)
+    mode4.insert(0, 'heasarc', 1)
 except:
     mode4.drop(['nearest','nearest_name','mode4'],axis=1,inplace=True)
     mode4.insert(0, 'nearest', "")
-    mode4.insert(0, 'mode4', 1)
+    mode4.insert(0, 'heasarc', 1)
     
 mode4=mode4.sort_values(by='time_met')
 mode4=mode4.reset_index(drop = True)
