@@ -47,8 +47,9 @@ mode1_trig=mode1["time_met"]
 
 #initializing for mode 1
 if len(mode1_trig)!=0:
+    mjd=mode1["time_mjd"].astype(int)
     for i in range(len(hea_trig)):
-        if hea_trig.at[i]>(mode1_trig.at[0]) and  hea_trig.at[i]<(mode1_trig.at[len(mode1_trig)-1]) :
+        if int(heasarc.at[i,'trigger_time_mjd']) in mjd:
             heasarc.at[i,'mode1']=1
 
     ##searching algo.
@@ -158,9 +159,10 @@ mode3_trig=mode3["time_met"]
 
 #initializing for mode3
 if len(mode3_trig)!=0:
+    mjd=mode3["time_mjd"].astype(int)
     for i in range(len(hea_trig)):
-        if hea_trig.at[i]>(mode3_trig.at[0]) and  hea_trig.at[i]<(mode3_trig.at[len(mode3_trig)-1]) :
-            heasarc.at[i,'mode3']=1
+        if int(heasarc.at[i,'trigger_time_mjd']) in mjd:
+            heasarc.at[i,'mode1']=1
 
     ##searching algo.
     a=0
@@ -213,9 +215,10 @@ mode4_trig=mode4["time_met"]
 
 #initializing for mode4
 if len(mode4_trig)!=0:
+    mjd=mode4["time_mjd"].astype(int)
     for i in range(len(hea_trig)):
-        if hea_trig.at[i]>(mode4_trig.at[0]) and  hea_trig.at[i]<(mode4_trig.at[len(mode4_trig)-1]) :
-            heasarc.at[i,'mode4']=1
+        if int(heasarc.at[i,'trigger_time_mjd']) in mjd:
+            heasarc.at[i,'mode1']=1
 
     ##searching algo.
     a=0
