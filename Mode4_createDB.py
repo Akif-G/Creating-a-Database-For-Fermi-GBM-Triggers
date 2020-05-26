@@ -16,18 +16,18 @@ for mode in modes:
     for date in dates:
         print(mode + " " + date + " started.")
         try:
-            #isCsav=False    #indicates if a date includes csav files
+            isCsav=False    #indicates if a date includes csav files
             savs = os.listdir(adress + mode + "/" + date)
             arr = []
             count += 1
             for sav in savs:
-                if ".csav" in sav or ".sav" in sav:
+                if ".csav" in sav:
                     arr.append(sav)
-                    #isCsav = True
-            #if isCsav==False:
-                #3for sav in savs:
-                    #if ".sav" in sav:
-                        #arr.append(sav)
+                    isCsav = True
+            if isCsav==False:
+                for sav in savs:
+                    if ".sav" in sav:
+                        arr.append(sav)
             print(".csav(With .sav) s are taken\n"+str(len(dates)-count))
             for i in arr:
                 sav_name = adress + mode + "/" + date + "/" + i

@@ -20,28 +20,27 @@ for mode in modes:
     for date in dates:
         print(mode + " " + date + " started.")
         try:
-            #isCsav=False    #indicates if a date includes csav files
+            isCsav=False    #indicates if a date includes csav files
             savs = os.listdir(adress + mode + "/" + date)
             arr = []
             count += 1
             for sav in savs:
-                if ".csav" in sav or ".sav" in sav:
+                if ".csav" in sav:
                     arr.append(sav)
-                    #isCsav = True
-            #if isCsav==False:
-                #for sav in savs:
-                    #if ".sav" in sav:
-                        #arr.append(sav)
+                    isCsav = True
+            if isCsav==False:
+                for sav in savs:
+                    if ".sav" in sav:
+                        arr.append(sav)
             print(".csav(With .sav) s are taken\n"+str(len(dates)-count))
             for i in arr:
                 sav_name = adress + mode + "/" + date + "/" + i
-                fromIDL = readsav(sav_name, idict=None, python_dict=True,
-                                    uncompressed_file_name=None, verbose=False)
+                print(sav_name)
+                fromIDL = readsav(sav_name, idict=None, python_dict=True,uncompressed_file_name=None,verbose=False)
                 for key, value in fromIDL.items():
                     if key == 'burst_data':
                         #allTimes.append(repr(value))
                         allTimes.append(value)
-
             print(mode + " " + date + " ended.\n")
         except:
             print("problem occured or end of files")
@@ -68,6 +67,9 @@ for i in allTimes:
     for j in i:
         asTrigtimes.append(td.trigDate(time=float(j[0]), Format="met"))
 
+#need to add detectors too: we assume length are same if everything is ok for asTrigtimes and allTimes:
+
+print(allTimes[1][1])
 
 count = 1
 sys.stdout.write("\r: ")

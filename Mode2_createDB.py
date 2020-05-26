@@ -17,24 +17,31 @@ for mode in modes:
     for date in dates:
         print(mode + " " + date + " started.")
         try:
-          savs = os.listdir(adress + mode + "/" + date)
-          arr = []
-          count+=1
-          for sav in savs:
-              if ".csav" in sav:
-                  arr.append(sav)	
-          print(".csavs are taken\n"+str(len(dates)-count))
-          for i in arr:
-              sav_name = adress + mode + "/" + date + "/" + i
-              fromIDL = readsav(sav_name, idict=None, python_dict=True, uncompressed_file_name=None, verbose=False)
-              for key, value in fromIDL.items():
-                  if key == 'burst_data':
-                      #allTimes.append(repr(value))
-                      allTimes.append(value)
-              
-          print(mode + " " + date + " ended.\n")
+            #isCsav=False    #indicates if a date includes csav files   #there is no need to look in savs here
+            savs = os.listdir(adress + mode + "/" + date)
+            arr = []
+            count += 1
+            for sav in savs:
+                if ".csav" in sav:
+                    arr.append(sav)
+                    #isCsav = True
+            #if isCsav==False:
+                #for sav in savs:
+                    #if ".sav" in sav:
+                        #arr.append(sav)
+            print(".csav(just .csav) s are taken\n"+str(len(dates)-count))
+            for i in arr:
+                sav_name = adress + mode + "/" + date + "/" + i
+                fromIDL = readsav(sav_name, idict=None, python_dict=True,
+                                    uncompressed_file_name=None, verbose=False)
+                for key, value in fromIDL.items():
+                    if key == 'burst_data':
+                        #allTimes.append(repr(value))
+                        allTimes.append(value)
+
+            print(mode + " " + date + " ended.\n")
         except:
-          print("problem occured or end of files")
+            print("problem occured or end of files")
         
     print(mode + " ended.")
 print('READING END\n->Starting to create the database...')
