@@ -35,7 +35,6 @@ for mode in modes:
             print(".csav(With .sav) s are taken\n"+str(len(dates)-count))
             for i in arr:
                 sav_name = adress + mode + "/" + date + "/" + i
-                print(sav_name)
                 fromIDL = readsav(sav_name, idict=None, python_dict=True,uncompressed_file_name=None,verbose=False)
                 for key, value in fromIDL.items():
                     if key == 'burst_data':

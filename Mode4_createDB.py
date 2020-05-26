@@ -68,6 +68,7 @@ for i in allTimes:
     for j in i:
         asTrigtimes.append(td.trigDate(time=float(j[0]),Format="met"))
 
+#need to add detectors too: we assume length are same if everything is ok for asTrigtimes and allTimes:
 
 count=1
 sys.stdout.write("\r: ")
