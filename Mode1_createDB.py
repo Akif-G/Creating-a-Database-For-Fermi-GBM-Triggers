@@ -32,7 +32,9 @@ for mode in modes:
                 for sav in savs:
                     if ".sav" in sav:
                         arr.append(sav)
-            print(".csav(With .sav) s are taken\n"+str(len(dates)-count))
+                print(".sav s are taken.\n"+str(len(dates)-count))
+            else:
+                print(".csav s are here! and taken.\n"+str(len(dates)-count))
             for i in arr:
                 sav_name = adress + mode + "/" + date + "/" + i
                 fromIDL = readsav(sav_name, idict=None, python_dict=True,uncompressed_file_name=None,verbose=False)
@@ -47,39 +49,39 @@ for mode in modes:
     print(mode + " ended.")
 print('READING END\n->Starting to create the database...')
 
-
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 conn = sqlite3.connect('triggered.db')
 c = conn.cursor()
 
 try:
-    c.execute('''CREATE TABLE Mode1 (time_mjd,time_iso, time_met)''')
+    c.execute('''CREATE TABLE Mode1 (time_mjd,time_iso, time_met,detectors)''')
 
 except Error:
     c.execute('''DROP TABLE Mode1''')
-    c.execute('''CREATE TABLE Mode1 (time_mjd,time_iso, time_met)''')
-
-asTrigtimes = []
-
-for i in allTimes:
-    for j in i:
-        asTrigtimes.append(td.trigDate(time=float(j[0]), Format="met"))
+    c.execute('''CREATE TABLE Mode1 (time_mjd,time_iso, time_met,detectors)''')
 
 #need to add detectors too: we assume length are same if everything is ok for asTrigtimes and allTimes:
 
-print(allTimes[1][1])
+trigTimesAndDetectors=[]
 
-count = 1
+for i in allTimes:
+    for j in i:
+        newTrigger=[]
+        newTrigger.append(td.trigDate(time=float(j[0]),Format="met"))
+        newTrigger.append("".join(map(str,j[2])))
+        trigTimesAndDetectors.append(newTrigger)
+
+count=1
 sys.stdout.write("\r: ")
-for i in range(len(asTrigtimes)):
-    c.execute('INSERT INTO Mode1 VALUES (?,?,?)',
-              (asTrigtimes[i].mjd, asTrigtimes[i].date, asTrigtimes[i].met))
+for i in range(len(trigTimesAndDetectors)):
+    c.execute('INSERT INTO Mode1 VALUES (?,?,?,?)',(trigTimesAndDetectors[i][0].mjd,trigTimesAndDetectors[i][0].date,trigTimesAndDetectors[i][0].met,trigTimesAndDetectors[i][1]))
     sys.stdout.write(str(count))
-    if count != len(asTrigtimes):
+    if count!=len(trigTimesAndDetectors):
         for _ in range(len(str(count))):
             sys.stdout.write("\r")
-    count = count+1
+    count=count+1
+
 
 
 conn.commit()

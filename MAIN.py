@@ -1,13 +1,21 @@
 import os		
 import sys
 
+"""
+execute python scripts in an order.
+
+-> create Heasarc Database
+-> Create Databases for each Mode
+-> Compare everything. (fast)
+-> Optional cross comperation validation test (slow)
+"""
+
 try:
     execfile('./createHeasarcDatabase.py')
 except NameError:
     exec(open('./createHeasarcDatabase.py').read())
 
 print("heasarc database created:")
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 
 try:
@@ -50,10 +58,6 @@ except NameError:
         print("DATABASE CREATED FOR MODE4 created:")
     except:
         print("file path problem occured while reading mode 4")
-
-
-
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 try:
     execfile('./compareDatabases.py')

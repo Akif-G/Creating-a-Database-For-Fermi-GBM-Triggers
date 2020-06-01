@@ -1,8 +1,9 @@
 import datetime as dt
 from astropy.time import Time
-# global leap Second file searchers...
-print("if any problem is appeared PLEASE NOTIFY DEVELOPER.")
 
+print("if any issue is appeared PLEASE NOTIFY DEVELOPER.")
+
+# global leap Second file searcher for given location:
 leapSecs=[]
 try:
     with open('/vdata1/shared/search_transients/codes/misc/leap_sec.txt', "r") as f:
@@ -14,7 +15,7 @@ try:
             except:
                 pass
     print("file found in:: /vdata1/shared/search_transients/codes/misc/leap_sec.txt")
-
+    #if global file is not found look for local file
 except:
     try:
         print("no Leap Second file found in:"+str(leapPath))
@@ -28,7 +29,7 @@ except:
                     break
                 except:
                     pass
-
+        #if local file is also not found use the values below.
     except:
         if len(leapSecs)<3:
             print("no Leap Second file found")
@@ -84,10 +85,12 @@ class trigDate:
         else:
             raise Exception
 
-        #print("Format is :", Format)
-
 
     def MJDtoMET(self,mjd):
+        #converts mjd to met.
+        #51910 : mission start date.
+        #returns float
+        
         met=(mjd-51910.00000000)*60*60*24
         for leap in leapSecs:
             if leap>=51910.00000000:

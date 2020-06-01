@@ -1,10 +1,16 @@
 import requests
 import os
 
+
 class website:
-    """To be able to use a website creates a website html from data file's first line.
+    """
+    To be able to use a website creates a website html from data file's first line.
     If there is no data file creates one. you can change data file's name by writing it while creating, fo futher use.
-    It can be constucted by userinput."""
+    It can be constucted by userinput.
+
+    @attributes : dataFile, dataFileName, dataFilePath => use dataFile generally.
+                : url => uses request if exist.
+    """
     
     heasarc_url="https://heasarc.gsfc.nasa.gov/FTP/fermi/data/tdat/heasarc_fermigtrig.tdat"
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
@@ -67,9 +73,11 @@ class website:
             self.dataFile.close()
 
     def change_dataFileName(self,dataFileName):
+        #changes output file' name
         self.dataFileName=dataFileName   
  
     def updateContent(self):
+        #updates content if connection exist if not update request is denied.
         try:
             self.dataFile=open(self.dataFileName,"r+")
             oldContent=self.dataFile.readlines()

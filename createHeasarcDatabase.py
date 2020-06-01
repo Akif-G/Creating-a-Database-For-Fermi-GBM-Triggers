@@ -2,32 +2,55 @@ import os
 import sys
 sys.path.insert(0,'..')
 
+"""
+@author https://github.com/Akif-G
+
+Create a database for heasarc named heasarc_data in triggered.db
+-to open databases : sqlitebrowser triggered.db-
+
+"""
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-import fromWebToDataFile as website
-import fermiTrigger as trig
+
+#necessary modules to import:
+import fromWebToDataFile as website     #using beautifulSoup would be an overkill...
+import fermiTrigger as trig             #trig is specified class for fermitriggers in mentioned website.
 
 
 print("\n\n")
+
+#create a website object from a link
 heasarc=website.website(dataFileName="heasarc",url="https://heasarc.gsfc.nasa.gov/FTP/fermi/data/tdat/heasarc_fermigtrig.tdat")
+
+#update if there is an internet connection
 try:
     heasarc.updateContent()
 except:
     print("no internet conneciton")
-    
+
+#allTriggers: deploy any triger object created by heasarc's website
 allTriggers=[]
 f=open(heasarc.dataFileName,"r")
 
+#read all the lines until <DATA>, dump them to the void : useless lines.
+print("Update the code if structure of the website is changed.")
 line=""
 while line!="<DATA>\n":
     try:    
         line=f.readline()
     except:
-        print("no DATA found : try updating")
+        print("no <DATA> found : try updating the local copy.")
 lines=f.readlines()
 
 
 print("Reading data...")
 
+"""
+1) read all the data until the <END>
+2) Create trig objects for every one of them
+3) Store them to save in database
+
+note: database updates better be seperate do not combine these two steps.
+"""
 count=1
 for line in lines:
     if line!="<END>\n":
@@ -64,7 +87,7 @@ except Error:
                 ra_scx,dec_scx,ra_scz,dec_scz,theta,phi,localization_source)''')
 
 
-count=1
+count=1     #count = 1 :: every time stands for counter in a screen when there is a big job to do...
 sys.stdout.write("\r: ")
 for i in allTriggers:
     c.execute('INSERT INTO heasarc_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(i.dictionary.get('version'),i.dictionary.get('trigger_name'),
@@ -85,6 +108,6 @@ for i in allTriggers:
     count=count+1
 print("\nTable created.")
 
-
+#nothing changes until commit()
 conn.commit()
 conn.close()
