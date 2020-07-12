@@ -33,12 +33,13 @@ mode1= pd.read_sql_query("SELECT * FROM Mode1", cnx)
 mode1["time_met"]=pd.to_numeric(mode1["time_met"],errors='ignore')
 
 try:
-    mode1.insert(0, 'nearest', 0)
+    mode1.insert(0, 'nearest', -1.0)
     mode1.insert(0, 'nearest_name', "")    
     mode1.insert(0, 'heasarc', 1)
 except:
     mode1.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
-    mode1.insert(0, 'nearest', "")
+    mode1.insert(0, 'nearest', -1.0)
+    mode1.insert(0, 'nearest_name', "")    
     mode1.insert(0, 'heasarc', 1)
 
 mode1=mode1.sort_values(by='time_met')
@@ -92,12 +93,13 @@ mode2= pd.read_sql_query("SELECT * FROM Mode2", cnx)
 mode2["time_met"]=pd.to_numeric(mode2["time_met"],errors='ignore')
 
 try:
-    mode2.insert(0, 'nearest', 0)
+    mode2.insert(0, 'nearest', -1.0)
     mode2.insert(0, 'nearest_name', "")    
     mode2.insert(0, 'heasarc', 1)
 except:
     mode2.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
-    mode2.insert(0, 'nearest', "")
+    mode2.insert(0, 'nearest', -1.0)
+    mode2.insert(0, 'nearest_name', "")    
     mode2.insert(0, 'heasarc', 1)
 
 mode2=mode2.sort_values(by='time_met')
@@ -150,12 +152,13 @@ mode3= pd.read_sql_query("SELECT * FROM Mode3", cnx)
 mode3["time_met"]=pd.to_numeric(mode3["time_met"],errors='ignore')
 
 try:
-    mode3.insert(0, 'nearest', 0)
+    mode3.insert(0, 'nearest', -1.0)
     mode3.insert(0, 'nearest_name', "")
     mode3.insert(0, 'heasarc', 1)
 except:
     mode3.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
-    mode3.insert(0, 'nearest', "")
+    mode3.insert(0, 'nearest', -1.0)
+    mode3.insert(0, 'nearest_name', "")
     mode3.insert(0, 'heasarc', 1)
 
 mode3=mode3.sort_values(by='time_met')
@@ -209,12 +212,13 @@ mode4= pd.read_sql_query("SELECT * FROM Mode4", cnx)
 mode4["time_met"]=pd.to_numeric(mode4["time_met"],errors='ignore')
 
 try:
-    mode4.insert(0, 'nearest', 0)
+    mode4.insert(0, 'nearest', -1.0)
     mode4.insert(0, 'nearest_name', "")
     mode4.insert(0, 'heasarc', 1)
 except:
     mode4.drop(['nearest','nearest_name','heasarc'],axis=1,inplace=True)
-    mode4.insert(0, 'nearest', "")
+    mode4.insert(0, 'nearest', -1.0)
+    mode4.insert(0, 'nearest_name', "")
     mode4.insert(0, 'heasarc', 1)
     
 mode4=mode4.sort_values(by='time_met')
