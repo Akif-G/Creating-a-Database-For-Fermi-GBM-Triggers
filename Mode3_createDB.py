@@ -7,6 +7,8 @@ adress = "/vdata1/shared/search_transients/results/Poisson/"
 modes = ["Mode_3"]  #, "Mode_1", "Mode_2", "Mode_4"]
 
 allTimes=[]
+allSavs = []
+
 for mode in modes:
     print("\n\n" + mode + " started.\n\n")
     dates = os.listdir(adress + mode)
@@ -40,6 +42,7 @@ for mode in modes:
                     if key == 'burst_data':
                         #allTimes.append(repr(value))
                         allTimes.append(value)
+                        allSavs.append(sav_name[:-4])
 
             print(mode + " " + date + " ended.\n")
         except:
@@ -67,17 +70,23 @@ except Error:
 
 trigTimesAndDetectors=[]
 
+countTime = 0
 for i in allTimes:
+    count = 0
     for j in i:
-        newTrigger=[]
-        newTrigger.append(td.trigDate(time=float(j[0]),Format="met"))
-        newTrigger.append("".join(map(str,j[2])))
+        count += 1
+        newTrigger = []
+        newTrigger.append(td.trigDate(time=float(j[0]), Format="met"))
+        newTrigger.append("".join(map(str, j[2])))
+        newTrigger.append(allSavs[countTime]+"_12det_"+str(count)+".ps")
         trigTimesAndDetectors.append(newTrigger)
+    countTime += 1
 
 count=1
 sys.stdout.write("\r: ")
 for i in range(len(trigTimesAndDetectors)):
-    c.execute('INSERT INTO Mode3 VALUES (?,?,?,?)',(trigTimesAndDetectors[i][0].mjd,trigTimesAndDetectors[i][0].date,trigTimesAndDetectors[i][0].met,trigTimesAndDetectors[i][1]))
+    c.execute('INSERT INTO Mode3 VALUES (?,?,?,?,?)',
+              (trigTimesAndDetectors[i][0].mjd, trigTimesAndDetectors[i][0].date, trigTimesAndDetectors[i][0].met, trigTimesAndDetectors[i][1], newTrigger[i][2]))
     sys.stdout.write(str(count))
     if count!=len(trigTimesAndDetectors):
         for _ in range(len(str(count))):
