@@ -59,12 +59,12 @@ c = conn.cursor()
 
 try:
     c.execute(
-        '''CREATE TABLE Poisson_Mode1 (time_mjd,time_iso, time_met,detectors,loc)''')
+        '''CREATE TABLE Poisson_Mode1 (time_mjd,time_iso, time_met,trig_dets,loc)''')
 
 except Error:
     c.execute('''DROP TABLE Poisson_Mode1''')
     c.execute(
-        '''CREATE TABLE Poisson_Mode1 (time_mjd,time_iso, time_met,detectors,loc)''')
+        '''CREATE TABLE Poisson_Mode1 (time_mjd,time_iso, time_met,trig_dets,loc)''')
 
 # need to add detectors too: we assume length are same if everything is ok for asTrigtimes and allTimes:
 

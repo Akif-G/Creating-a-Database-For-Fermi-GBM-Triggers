@@ -62,12 +62,12 @@ c = conn.cursor()
 
 try:
     c.execute(
-        '''CREATE TABLE Poisson_Mode4 (time_mjd,time_iso, time_met,detectors,location)''')
+        '''CREATE TABLE Poisson_Mode4 (time_mjd,time_iso, time_met,trig_dets,location)''')
 
 except Error:
     c.execute('''DROP TABLE Poisson_Mode4''')
     c.execute(
-        '''CREATE TABLE Poisson_Mode4 (time_mjd,time_iso, time_met,detectors,location)''')
+        '''CREATE TABLE Poisson_Mode4 (time_mjd,time_iso, time_met,trig_dets,location)''')
 
 trigTimesAndDetectors = []
 
