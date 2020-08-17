@@ -42,8 +42,10 @@ for mode in modes:
                     if key == 'burst_data':
                         # allTimes.append(repr(value))
                         allTimes.append(value)
-                        allSavs.append(sav_name[:-4])
-            print(mode + " " + date + " ended.\n")
+                        if isCsav==False:
+                            allSavs.append(sav_name[:-4]+"/"+i[:-4])
+                        else:
+                            allSavs.append(sav_name[:-5]+"/"+i[:-5])
         except:
             print("problem occured or end of files")
 
@@ -82,7 +84,7 @@ count = 1
 sys.stdout.write("\r: ")
 for i in range(len(trigTimesAndDetectors)):
     c.execute('INSERT INTO Mode1 VALUES (?,?,?,?,?)',
-              (trigTimesAndDetectors[i][0].mjd, trigTimesAndDetectors[i][0].date, trigTimesAndDetectors[i][0].met, trigTimesAndDetectors[i][1], newTrigger[i][2]))
+              (trigTimesAndDetectors[i][0].mjd, trigTimesAndDetectors[i][0].date, trigTimesAndDetectors[i][0].met, trigTimesAndDetectors[i][1], trigTimesAndDetectors[i][2]))
     sys.stdout.write(str(count))
     if count != len(trigTimesAndDetectors):
         for _ in range(len(str(count))):
