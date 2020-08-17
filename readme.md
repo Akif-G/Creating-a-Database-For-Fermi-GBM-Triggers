@@ -12,7 +12,7 @@ first of all:
 
 branch_name can be: / empty for cloning: will clon on master (not preffered) /  preffered: github / or literally anything you want. 
 ```console
-git clone -b <branch_name> https://github.com/Akif-G/Creating-a-Database-For-Fermi-GBM-Triggers 
+git clone https://github.com/Akif-G/Creating-a-Database-For-Fermi-GBM-Triggers 
 ```
 
 
