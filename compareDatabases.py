@@ -30,7 +30,7 @@ hea_trig = heasarc["trigger_time"]
 
 # MODE 1
 
-mode1 = pd.read_sql_query("SELECT * FROM Mode1", cnx)
+mode1 = pd.read_sql_query("SELECT * FROM Poisson_Mode1", cnx)
 mode1["time_met"] = pd.to_numeric(mode1["time_met"], errors='ignore')
 
 try:
@@ -99,7 +99,7 @@ else:
 
 # MODE 2
 
-mode2 = pd.read_sql_query("SELECT * FROM Mode2", cnx)
+mode2 = pd.read_sql_query("SELECT * FROM Poisson_Mode2", cnx)
 mode2["time_met"] = pd.to_numeric(mode2["time_met"], errors='ignore')
 
 try:
@@ -168,7 +168,7 @@ else:
 
 # MODE 3
 
-mode3 = pd.read_sql_query("SELECT * FROM Mode3", cnx)
+mode3 = pd.read_sql_query("SELECT * FROM Poisson_Mode3", cnx)
 mode3["time_met"] = pd.to_numeric(mode3["time_met"], errors='ignore')
 
 try:
@@ -237,7 +237,7 @@ else:
 
 # MODE 4
 
-mode4 = pd.read_sql_query("SELECT * FROM Mode4", cnx)
+mode4 = pd.read_sql_query("SELECT * FROM Poisson_Mode4", cnx)
 mode4["time_met"] = pd.to_numeric(mode4["time_met"], errors='ignore')
 
 try:
@@ -329,10 +329,10 @@ for i in range(len(hea_trig)):
 print("data is completely investigated")
 
 heasarc.to_sql('heasarc_data', cnx, if_exists='replace', index=False)
-mode1.to_sql('Mode1', cnx, if_exists='replace', index=False)
-mode2.to_sql('Mode2', cnx, if_exists='replace', index=False)
-mode3.to_sql('Mode3', cnx, if_exists='replace', index=False)
-mode4.to_sql('Mode4', cnx, if_exists='replace', index=False)
+mode1.to_sql('Poisson_Mode1', cnx, if_exists='replace', index=False)
+mode2.to_sql('Poisson_Mode2', cnx, if_exists='replace', index=False)
+mode3.to_sql('Poisson_Mode3', cnx, if_exists='replace', index=False)
+mode4.to_sql('Poisson_Mode4', cnx, if_exists='replace', index=False)
 
 
 cnx.commit()
