@@ -42,7 +42,7 @@ for mode in modes:
                     if key == 'burst_data':
                         # allTimes.append(repr(value))
                         allTimes.append(value)
-                        if isCsav==False:
+                        if isCsav == False:
                             allSavs.append(sav_name[:-4]+"/"+i[:-4])
                         else:
                             allSavs.append(sav_name[:-5]+"/"+i[:-5])
@@ -58,11 +58,13 @@ conn = sqlite3.connect('triggered.db')
 c = conn.cursor()
 
 try:
-    c.execute('''CREATE TABLE Mode1 (time_mjd,time_iso, time_met,detectors,loc)''')
+    c.execute(
+        '''CREATE TABLE Poisson_Mode1 (time_mjd,time_iso, time_met,trig_dets,loc)''')
 
 except Error:
-    c.execute('''DROP TABLE Mode1''')
-    c.execute('''CREATE TABLE Mode1 (time_mjd,time_iso, time_met,detectors,loc)''')
+    c.execute('''DROP TABLE Poisson_Mode1''')
+    c.execute(
+        '''CREATE TABLE Poisson_Mode1 (time_mjd,time_iso, time_met,trig_dets,loc)''')
 
 # need to add detectors too: we assume length are same if everything is ok for asTrigtimes and allTimes:
 
@@ -83,7 +85,7 @@ for i in allTimes:
 count = 1
 sys.stdout.write("\r: ")
 for i in range(len(trigTimesAndDetectors)):
-    c.execute('INSERT INTO Mode1 VALUES (?,?,?,?,?)',
+    c.execute('INSERT INTO Poisson_Mode1 VALUES (?,?,?,?,?)',
               (trigTimesAndDetectors[i][0].mjd, trigTimesAndDetectors[i][0].date, trigTimesAndDetectors[i][0].met, trigTimesAndDetectors[i][1], trigTimesAndDetectors[i][2]))
     sys.stdout.write(str(count))
     if count != len(trigTimesAndDetectors):
