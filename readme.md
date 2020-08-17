@@ -1,7 +1,62 @@
 
 # Creating a Database of Astrophysical Sources
  
+  ---
+## Contributing
 
+first of all:
+- create a github account
+- be sure you have Git installed in your system
+
+### Download code:
+
+branch_name can be: / empty for cloning: will clon on master (not preffered) /  preffered: github / or literally anything you want. 
+```console
+git clone -b <branch_name> https://github.com/Akif-G/Creating-a-Database-For-Fermi-GBM-Triggers 
+```
+
+
+### Make Your changes on your favorite ide
+
+### save them to your local git repository:
+
+```console
+git add .
+
+git commit -m "<AN EXPLANATION HERE>"
+```
+
+
+### push your changes to the github repository on origin (github.com) When You are completely done.
+
+- do not create Pull request after every commit you done,
+- can not create a Pull request if origin repository has changed...
+```console
+git push -u origin <branch_name>
+```
+ ---
+
+### Contributing Again:
+you can continue contributing if your previous commits merged in origin repository (github)
+
+```console
+git pull  -u origin master
+```
+
+### Make Your changes on your favorite ide
+
+### save them to your local git repository:
+
+```console
+git add .
+
+git commit -m "<AN EXPLANATION HERE>"
+```
+### push your changes to the github repository on origin (github.com) When You are completely done.
+```console
+git push -u origin <branch_name>
+```
+---
 ## Abstract
 
 The Fermi Gamma-ray Space Telescope, formerly known as the Gamma-ray Large Area Space Telescope (GLAST), the Gamma-ray Burst Monitor (GBM) was designed by the National Aeronautics and Space Administration (NASA) to capture and monitor gamma-rays from a distant cosmos. GBM contains 12 detectors that are used by astrophysicists to obtain and analyze information.
