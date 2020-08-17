@@ -46,7 +46,6 @@ git pull  -u origin master
 ### Make Your changes on your favorite ide
 
 ### save them to your local git repository:
-
 ```console
 git add .
 
