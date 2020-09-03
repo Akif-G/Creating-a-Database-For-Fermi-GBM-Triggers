@@ -15,7 +15,6 @@ branch_name can be: / empty for cloning: will clon on master (not preffered) /  
 git clone https://github.com/Akif-G/Creating-a-Database-For-Fermi-GBM-Triggers 
 ```
 
-
 ### Make Your changes on your favorite ide
 
 ### save them to your local git repository:
