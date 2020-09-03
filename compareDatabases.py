@@ -34,7 +34,7 @@ mode1 = pd.read_sql_query("SELECT * FROM Poisson_Mode1", cnx)
 mode1["time_met"] = pd.to_numeric(mode1["time_met"], errors='ignore')
 
 try:
-    mode1.insert(0, 'nearest', 0)
+    mode1.insert(0, 'nearest', -2.0)
     mode1.insert(0, 'nearest(abs)', -1.0)
     mode1.insert(0, 'nearest_name', "")
     mode1.insert(0, 'heasarc', 1)
@@ -103,7 +103,7 @@ mode2 = pd.read_sql_query("SELECT * FROM Poisson_Mode2", cnx)
 mode2["time_met"] = pd.to_numeric(mode2["time_met"], errors='ignore')
 
 try:
-    mode2.insert(0, 'nearest', 0)
+    mode2.insert(0, 'nearest', -2.0)
     mode2.insert(0, 'nearest(abs)', -1.0)
     mode2.insert(0, 'nearest_name', "")
     mode2.insert(0, 'heasarc', 1)
@@ -172,7 +172,7 @@ mode3 = pd.read_sql_query("SELECT * FROM Poisson_Mode3", cnx)
 mode3["time_met"] = pd.to_numeric(mode3["time_met"], errors='ignore')
 
 try:
-    mode3.insert(0, 'nearest', 0)
+    mode3.insert(0, 'nearest', -2.0)
     mode3.insert(0, 'nearest(abs)', -1.0)
     mode3.insert(0, 'nearest_name', "")
     mode3.insert(0, 'heasarc', 1)
@@ -241,7 +241,7 @@ mode4 = pd.read_sql_query("SELECT * FROM Poisson_Mode4", cnx)
 mode4["time_met"] = pd.to_numeric(mode4["time_met"], errors='ignore')
 
 try:
-    mode4.insert(0, 'nearest', 0)
+    mode4.insert(0, 'nearest', -2.0)
     mode4.insert(0, 'nearest(abs)', -1.0)
     mode4.insert(0, 'nearest_name', "")
     mode4.insert(0, 'heasarc', 1)
